@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bato-bato-pick</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: rgb(38, 36, 158);
+            font-size: 2em;
+            margin-bottom: 50px;
+        }
+
+        .result {
+            color: rgb(223, 63, 63);
+            font-size: 2em;
+            margin-bottom: 50px;
+        }
+
+        .choice-display {
+            font-size: 1.5em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .choice-display p {
+            margin: 0;
+        }
+
+        #userChoice {
+            margin-left: 10px;
+        }
+
+        #computerChoice {
+            margin-right: 10px;
+        }
+
+        .choices {
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 3em;
+            margin: 0 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .result-text {
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors Game</h1>
+        <div class="result">
+            <p id="resultText" class="result-text"></p>
+        </div>
+        <div class="choice-display">
+            <p>Your Choice: <span id="userChoice"></span></p>
+            <p>Computer Choice: <span id="computerChoice"></span></p>
+        </div>
+        <div class="choices">
+            <button id="rock">✊</button>
+            <button id="paper">✋</button>
+            <button id="scissors">✌️</button>
+        </div>
+    </div>
+
+    <script>
+        const choices = ["rock", "paper", "scissors"];
+        const handEmojis = {
+            rock: "✊",
+            paper: "✋",
+            scissors: "✌️"
+        };
+
+        document.getElementById("rock").addEventListener("click", () => playGame("rock"));
+        document.getElementById("paper").addEventListener("click", () => playGame("paper"));
+        document.getElementById("scissors").addEventListener("click", () => playGame("scissors"));
+
+        function playGame(userChoice) {
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+            const result = determineWinner(userChoice, computerChoice);
+
+            document.getElementById("userChoice").textContent = handEmojis[userChoice];
+            document.getElementById("computerChoice").textContent = handEmojis[computerChoice];
+            document.getElementById("resultText").textContent = result;
+        }
+
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return "It's a tie!";
+            } else if (
+                (userChoice === "rock" && computerChoice === "scissors") ||
+                (userChoice === "paper" && computerChoice === "rock") ||
+                (userChoice === "scissors" && computerChoice === "paper")
+            ) {
+                return "YOU WIN!";
+            } else {
+                return "YOU LOSE!";
+            }
+        }
+    </script>
+</body>
+</html>
